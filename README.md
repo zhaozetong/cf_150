@@ -17,3 +17,8 @@
 | C     | `const char* cstr = s.c_str();`C风格 |
 | 比较 | `s1 == s2` 或 `s1.compare(s2);` |
 | 转换 | `std::to_string(num);` `stoi(s);stod()`分别int,double |
+
+
+### 小记录
+* for循环会先判断条件再进行
+* tuple访问，`get<index>(t)`
