@@ -39,6 +39,25 @@ int main() {
 ```
 枚举变量默认底层为`int`
 
+### 数论
+计算阶乘、幂的时候，可以用到快速幂去计算结果
+注意，奇数的时候将结果传入,偶数的时候自己乘自己
+```
+long long quickPow(long long a, long long b, long long mod) {
+    long long result = 1;
+    a = a % mod;  // 防止a超出mod范围
+    while (b > 0) {
+        if (b % 2 == 1) {  // 如果b是奇数，乘上a
+            result = (result * a) % mod;
+        }
+        a = (a * a) % mod;  // 将a平方
+        b /= 2;  // b减半
+    }
+    return result;
+}
+```
+
+
 ### 小记录
 * for循环会先判断条件再进行
 * tuple访问，`get<index>(t)`
