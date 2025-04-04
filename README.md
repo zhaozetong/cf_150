@@ -57,6 +57,12 @@ long long quickPow(long long a, long long b, long long mod) {
 }
 ```
 
+### 数据类型
+* 整数转换:
+  * c语法:`int intVal = (int)f;`
+  * cpp:`int intVal2 = static_cast<int>(f); `
+  * 使用函数:`floor(),ceil(),round()`
+
 
 ### 小记录
 * for循环会先判断条件再进行
