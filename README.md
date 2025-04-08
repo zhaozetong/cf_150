@@ -1,5 +1,54 @@
 ## 刷题记录文档
 
+### 重要函数
+#### 1.sort()
+**简介**
+`std::sort` 是 C++ 标准库中用于排序的算法，位于 `<algorithm>` 头文件中。它通过快速排序算法实现，对容器（如数组、`vector`）中的元素进行排序。
+
+- **基本用法：** 通过传入容器的开始和结束迭代器来排序。
+- **自定义排序规则：** 通过传递比较函数或 lambda 表达式实现不同的排序规则。
+
+1. **排序数组**
+
+```cpp
+std::sort(arr, arr + n);
+```
+
+2. **排序 `vector`**
+
+```cpp
+std::sort(vec.begin(), vec.end());
+```
+
+3. **降序排序（使用自定义比较函数）**
+
+```cpp
+std::sort(vec.begin(), vec.end(), [](int a, int b) { return a > b; });
+```
+
+4. **排序复杂数据类型（如结构体）**
+
+```cpp
+std::sort(people.begin(), people.end(), comparePerson);
+```
+
+**示例代码**
+
+```cpp
+std::vector<int> vec = {5, 3, 8, 1, 2};
+
+// 默认升序排序
+std::sort(vec.begin(), vec.end());
+
+// 自定义降序排序
+std::sort(vec.begin(), vec.end(), [](int a, int b) { return a > b; });
+```
+
+**总结**
+- `std::sort` 是排序容器中元素的利器。
+- 通过迭代器定义排序范围。
+- 支持自定义排序规则（升序、降序等）。
+
 ### 字符串
 #### 总结
 | 操作 | 方法 |
@@ -156,5 +205,8 @@ long long quickPow(long long a, long long b, long long mod) {
 * for循环会先判断条件再进行
 * tuple访问，`get<index>(t)`
 * cpp中，mode得到的结果符号和原来数字一致
+* 删除元素  `vec.erase(std::remove_if(vec.begin(), vec.end(), [m](int x) { return x > m; }), vec.end());` 利用erase+remove_if
+* `remove_if`是使用*双指针*去移动元素,效率还是蛮高的
+* python 中使用`a = [0]*n`可以,但是`a=[[0]*n]*m`->(m,n)不太行,因为这样会直接引用数组而不是创建新的
 
 
