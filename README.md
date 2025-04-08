@@ -88,7 +88,7 @@ int main() {
 ```
 枚举变量默认底层为`int`
 
-### Map `unordered_map`
+### 无序Map `unordered_map`
 #### 基本用法
 
 ```cpp
@@ -175,6 +175,188 @@ int main() {
     my_map 是一个 `std::map<int, std::string>`，键是 `int` 类型，值是 `std::string` 类型。
     使用` for (const auto& pair : my_map) `来遍历 `map `中的所有元素。每个元素是一个键值对`std::pair<const Key, T>`，`pair.first `是键，`pair.second` 是值。
     通过 `pair.first `输出所有的键。
+
+### Map (`Map`)
+`std::map` 是一个有序的键值对容器，基于**红黑树**实现。它存储唯一的键值对，并自动按照键进行排序。
+
+特点：
+* 有序：元素按键升序排列（默认），可以自定义排序方式。
+* 唯一键：每个键只能出现一次。
+* 查找、插入、删除操作：时间复杂度为 O(log n)。
+* 自动排序：按键的升序（可以自定义）。
+
+#### 常用操作：
+
+1. **插入元素**：
+
+   - 使用 `insert` 或通过 `[]` 运算符。
+
+   ```cpp
+   std::map<int, std::string> m;
+   m[1] = "One"; // 插入或更新
+   m.insert({2, "Two"}); // 插入新元素
+   ```
+
+2. **查找元素**：
+
+   - 使用 `find`，返回一个迭代器。
+
+   ```cpp
+   auto it = m.find(1); // 查找键为 1 的元素
+   if (it != m.end()) {
+       std::cout << it->second; // 输出 "One"
+   }
+   ```
+
+3. **访问元素**：
+
+   - 使用 `[]` 运算符可以访问和修改元素。
+
+   ```cpp
+   m[3] = "Three"; // 插入键值对
+   std::cout << m[3]; // 输出 "Three"
+   ```
+
+4. **删除元素**：
+
+   - 使用 `erase` 按键删除元素。
+
+   ```cpp
+   m.erase(1); // 删除键为 1 的元素
+   ```
+
+5. **遍历 `map`**：
+
+   - 使用迭代器遍历。
+
+   ```cpp
+   for (auto it = m.begin(); it != m.end(); ++it) {
+       std::cout << it->first << ": " << it->second << std::endl;
+   }
+   ```
+6. **查找最大最小值**：
+   * 最小键：`map` 的 `begin()` 返回指向第一个元素的迭代器，该元素即为最小的键值对`auto p = map.begin()`,`p->first`得到key，`p->second`得到value。
+   * 最大键：`map` 的 `rbegin()` 返回指向最后一个元素的逆向迭代器，该元素即为最大的键值对。
+
+
+#### 自定义排序：
+
+- 使用自定义比较器进行降序或其他排序方式(默认排序为**升序**)。
+
+  ```cpp
+  std::map<int, std::string, std::greater<int>> m; // 按降序排列
+  m[3] = "Three";
+  m[1] = "One";
+  m[2] = "Two";
+  ```
+
+### Multi_Map
+`std::multimap` 是 C++ STL 中的一个容器，它类似于 `std::map`，但是允许**多个元素具有相同的键**。它是一个有序关联容器，每个键可以对应多个值。
+
+#### 特点：
+
+- **有序**：元素按键的顺序排列，默认升序（可自定义排序规则）。
+- **允许重复键**：同一键可以插入多个值。
+- **自动排序**：插入时自动根据键排序。
+- **查找、插入、删除操作**：时间复杂度为 O(log n)。
+
+#### 常用操作：
+
+1. **插入元素**：
+
+   ```cpp
+   std::multimap<int, std::string> m;
+   m.insert({1, "One"});
+   m.insert({1, "First One"});
+   m.insert({2, "Two"});
+   ```
+
+2. **遍历 `multimap`**：
+
+   ```cpp
+   for (const auto& pair : m) {
+       std::cout << "Key: " << pair.first << ", Value: " << pair.second << std::endl;
+   }
+   ```
+
+3. **查找某个键的所有值**：
+   使用 `equal_range()` 查找所有具有相同键的元素。
+
+   ```cpp
+   auto range = m.equal_range(1);  // 查找键为 1 的所有元素
+   for (auto it = range.first; it != range.second; ++it) {
+       std::cout << "Key: " << it->first << ", Value: " << it->second << std::endl;
+   }
+   ```
+
+4. **删除元素**：
+   使用 `erase()` 删除特定键或迭代器指向的元素。
+
+   ```cpp
+   m.erase(1);  // 删除所有键为 1 的元素
+   ```
+
+### 双端队列 deque
+`std::deque`（双端队列）是 C++ STL 中的一个容器，它允许在队列的两端进行高效的插入和删除操作。与 `std::vector` 类似，`std::deque` 支持随机访问，但它的元素存储在多个块中，使得它可以在两端都进行高效的操作。
+
+#### 特点：
+- **双端访问**：支持从容器的两端进行插入、删除、访问等操作。
+- **高效的两端插入和删除**：在两端插入和删除元素的时间复杂度是 O(1)。
+- **支持随机访问**：可以通过索引直接访问任何元素，时间复杂度为 O(1)。
+- **动态大小**：自动扩展，不需要预先定义大小。
+
+#### 常用操作：
+1. **定义和初始化**：
+   ```cpp
+   std::deque<int> dq;  // 创建一个空的 deque
+   std::deque<int> dq2 = {1, 2, 3, 4};  // 用初始值初始化 deque
+   ```
+
+2. **添加元素**：
+   - 在尾部添加元素：`push_back()`。
+   - 在头部添加元素：`push_front()`。
+   ```cpp
+   dq.push_back(5);    // 在队列尾部添加元素 5
+   dq.push_front(0);   // 在队列头部添加元素 0
+   ```
+
+3. **删除元素**：
+   - 从尾部删除元素：`pop_back()`。
+   - 从头部删除元素：`pop_front()`。
+   ```cpp
+   dq.pop_back();  // 删除队列尾部元素
+   dq.pop_front(); // 删除队列头部元素
+   ```
+
+4. **访问元素**：
+   - 使用索引访问元素：`operator[]` 或 `at()`。
+   - `at()` 会进行边界检查，`operator[]` 不会。
+   ```cpp
+   std::cout << dq[0];  // 访问第一个元素
+   std::cout << dq.at(1);  // 访问第二个元素，带边界检查
+   ```
+
+5. **查询容器信息**：
+   - `size()` 获取容器的元素个数。
+   - `empty()` 判断容器是否为空。
+   ```cpp
+   std::cout << dq.size();  // 获取队列的大小
+   std::cout << dq.empty(); // 判断队列是否为空
+   ```
+
+6. **遍历 deque**：
+   - 使用基于范围的 for 循环遍历。
+   ```cpp
+   for (const auto& val : dq) {
+       std::cout << val << " ";
+   }
+   ```
+
+7. **修改元素**：
+   - 使用索引或迭代器修改元素。
+   ```cpp
+   dq[1] = 10;  // 修改第二个元素
+   ```
 
 ### 数论
 计算阶乘、幂的时候，可以用到快速幂去计算结果
