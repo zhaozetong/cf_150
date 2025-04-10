@@ -12,7 +12,7 @@
 !Makefile
 !*.md
 !.gitignore
-!*.json
+# !*.json
 tempCodeRunnerFile.*
 # 其他你想保留的文件类型...
 .vscode/settings.json
