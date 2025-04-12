@@ -49,6 +49,42 @@ std::sort(vec.begin(), vec.end(), [](int a, int b) { return a > b; });
 - 通过迭代器定义排序范围。
 - 支持自定义排序规则（升序、降序等）。
 
+#### 2.全排列`next_permulation`和`prev_permulation`
+当然可以！我们来详细讲一下 C++ 中 `<algorithm>` 头文件中的两个排列相关函数：`std::next_permutation` 和 `std::prev_permutation`，以及如何手动实现它们。
+
+------
+
+
+1. `std::next_permutation`
+
+  ```cpp
+  bool next_permutation(BidirectionalIterator first, BidirectionalIterator last);
+  ```
+
+  - 它将 `[first, last)` 范围内的元素重排为**下一个字典序排列**。
+  - 如果已经是最大字典序，则返回 `false`，并将序列变为最小排列（即升序排列）。
+
+2. `std::prev_permutation`
+
+  ```cpp
+  bool prev_permutation(BidirectionalIterator first, BidirectionalIterator last);
+  ```
+
+  - 它将范围内的元素重排为**上一个字典序排列**。
+  - 如果已经是最小字典序，则返回 `false`，并将序列变为最大排列（即降序排列）。
+实例:
+``` cpp
+    std::vector<int> v = {1, 2, 3};
+
+    // 所有排列
+    do {
+        for (int x : v)
+            std::cout << x << ' ';
+        std::cout << '\n';
+    } while (std::next_permutation(v.begin(), v.end()));
+```
+
+
 ### 字符串
 #### 总结
 | 操作 | 方法 |
@@ -71,7 +107,7 @@ std::sort(vec.begin(), vec.end(), [](int a, int b) { return a > b; });
 ### 枚举类
 `enum` 枚举中的常量默认从 0 开始递增，也就是说，Red 会对应 0，Green 会对应 1，Blue 会对应 2。如果需要，可以显式地为枚举项指定值。
 用法:
-```
+```cpp
 // 定义一个枚举类型
 enum Color {
     Red,    // 默认值为 0
